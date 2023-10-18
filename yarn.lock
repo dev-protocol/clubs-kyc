@@ -1263,16 +1263,16 @@
   integrity sha512-CS2rOaoQ/eAgAfcTfq6amKG7bsN+EMcgGY4FAFQdvSj2y1ixvOZTUA9mOtCai7E1SYu283XNw7urKK30nP3wkQ==
 
 "@types/hast@^2.0.0":
-  version "2.3.6"
-  resolved "https://registry.yarnpkg.com/@types/hast/-/hast-2.3.6.tgz#bb8b05602112a26d22868acb70c4b20984ec7086"
-  integrity sha512-47rJE80oqPmFdVDCD7IheXBrVdwuBgsYwoczFvKmwfo2Mzsnt+V9OONsYauFmICb6lQPpCuXYJWejBNs4pDJRg==
+  version "2.3.7"
+  resolved "https://registry.yarnpkg.com/@types/hast/-/hast-2.3.7.tgz#5e9bd7ab4452d5313aeec9d38fbc193a70f8d810"
+  integrity sha512-EVLigw5zInURhzfXUM65eixfadfsHKomGKUakToXo84t8gGIJuTcD2xooM2See7GyQ7DRtYjhCHnSUQez8JaLw==
   dependencies:
     "@types/unist" "^2"
 
 "@types/hast@^3.0.0":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@types/hast/-/hast-3.0.1.tgz#e1705ec9258ac4885659c2d50bac06b4fcd16466"
-  integrity sha512-hs/iBJx2aydugBQx5ETV3ZgeSS0oIreQrFJ4bjBl0XvM4wAmDjFEALY7p0rTSLt2eL+ibjRAAs9dTPiCLtmbqQ==
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@types/hast/-/hast-3.0.2.tgz#e6c1126a33955cb9493a5074ddf1873fb48248c7"
+  integrity sha512-B5hZHgHsXvfCoO3xgNJvBnX7N8p86TqQeGKXcokW4XXi+qY4vxxPSFYofytvVmpFxzPv7oxDQzjg5Un5m2/xiw==
   dependencies:
     "@types/unist" "*"
 
@@ -1282,28 +1282,28 @@
   integrity sha512-RbSSoHliUbnXj3ny0CNFOoxrIDV6SUGyStHsvDqosw6CkdPV8TtWGlfecuK4ToyMEAql6pzNxgCFKanovUzlgQ==
 
 "@types/mdast@^3.0.0":
-  version "3.0.13"
-  resolved "https://registry.yarnpkg.com/@types/mdast/-/mdast-3.0.13.tgz#b7ba6e52d0faeb9c493e32c205f3831022be4e1b"
-  integrity sha512-HjiGiWedR0DVFkeNljpa6Lv4/IZU1+30VY5d747K7lBudFc3R0Ibr6yJ9lN3BE28VnZyDfLF/VB1Ql1ZIbKrmg==
+  version "3.0.14"
+  resolved "https://registry.yarnpkg.com/@types/mdast/-/mdast-3.0.14.tgz#0735473a5b35be032b9f2685b7413cbab1b8a639"
+  integrity sha512-gVZ04PGgw1qLZKsnWnyFv4ORnaJ+DXLdHTVSFbU8yX6xZ34Bjg4Q32yPkmveUP1yItXReKfB0Aknlh/3zxTKAw==
   dependencies:
     "@types/unist" "^2"
 
 "@types/mdast@^4.0.0":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@types/mdast/-/mdast-4.0.1.tgz#9c45e60a04e79f160dcefe6545d28ae536a6ed22"
-  integrity sha512-IlKct1rUTJ1T81d8OHzyop15kGv9A/ff7Gz7IJgrk6jDb4Udw77pCJ+vq8oxZf4Ghpm+616+i1s/LNg/Vh7d+g==
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/mdast/-/mdast-4.0.2.tgz#4695661024ffbd9e52cf71e05c69a1f08c0792f6"
+  integrity sha512-tYR83EignvhYO9iU3kDg8V28M0jqyh9zzp5GV+EO+AYnyUl3P5ltkTeJuTiFZQFz670FSb3EwT/6LQdX+UdKfw==
   dependencies:
     "@types/unist" "*"
 
 "@types/ms@*":
-  version "0.7.32"
-  resolved "https://registry.yarnpkg.com/@types/ms/-/ms-0.7.32.tgz#f6cd08939ae3ad886fcc92ef7f0109dacddf61ab"
-  integrity sha512-xPSg0jm4mqgEkNhowKgZFBNtwoEwF6gJ4Dhww+GFpm3IgtNseHQZ5IqdNwnquZEoANxyDAKDRAdVo4Z72VvD/g==
+  version "0.7.33"
+  resolved "https://registry.yarnpkg.com/@types/ms/-/ms-0.7.33.tgz#80bf1da64b15f21fd8c1dc387c31929317d99ee9"
+  integrity sha512-AuHIyzR5Hea7ij0P9q7vx7xu4z0C28ucwjAZC0ja7JhINyCnOw8/DnvAPQQ9TfOlCtZAmCERKQX9+o1mgQhuOQ==
 
 "@types/nlcst@^1.0.0":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@types/nlcst/-/nlcst-1.0.2.tgz#dfcc9ef164e2d2a76ce7d249a9b909b7d0b7b616"
-  integrity sha512-ykxL/GDDUhqikjU0LIywZvEwb1NTYXTEWf+XgMSS2o6IXIakafPccxZmxgZcvJPZ3yFl2kdL1gJZz3U3iZF3QA==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@types/nlcst/-/nlcst-1.0.3.tgz#3b4e5959374818168023a8c3db9b05f6693eafb9"
+  integrity sha512-cpO6PPMz4E++zxP2Vhp/3KVl2Nbtj+Iksb25rlRinG7mphu2zmCIKWWlqdsx1NwJEISogR2eeZTD7JqLOCzaiw==
   dependencies:
     "@types/unist" "^2"
 
@@ -1763,9 +1763,9 @@ arrify@^3.0.0:
   integrity sha512-tLkvA81vQG/XqE2mjDkGQHoOINtMHtysSnemrmoGe6PydDPMRbVugqyk4A6V/WDWEfm3l+0d8anA9r8cv/5Jaw==
 
 astro@^3.0.12:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/astro/-/astro-3.3.1.tgz#f190947c8cf35c9ebfbbe16728372bf3bb4f1da8"
-  integrity sha512-PzXJN8IIjQrxf+D39utnBtxscdqizwslOKoXXGtVFCA66IPh37HzGts0VLtB/kSf8ouTojk5JBQWbevDiW53VQ==
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/astro/-/astro-3.3.2.tgz#0439b38b0f476472eddac080f0eba6e46bb1a4c5"
+  integrity sha512-uyimGY0p1gYXKAZe3/RCfbqNbuwpEvPkTKF5TE63Glb9ZgeLUBXu+ZlsG4LIMxCQ40p5F0D5+zuNJdH+om2PQQ==
   dependencies:
     "@astrojs/compiler" "^2.1.0"
     "@astrojs/internal-helpers" "0.2.1"
@@ -6028,9 +6028,9 @@ vfile@^6.0.0:
     vfile-message "^4.0.0"
 
 vite@^4.4.9:
-  version "4.4.11"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-4.4.11.tgz#babdb055b08c69cfc4c468072a2e6c9ca62102b0"
-  integrity sha512-ksNZJlkcU9b0lBwAGZGGaZHCMqHsc8OpgtoYhsQ4/I2v5cnpmmmqe5pM4nv/4Hn6G/2GhTdj0DhZh2e+Er1q5A==
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-4.5.0.tgz#ec406295b4167ac3bc23e26f9c8ff559287cff26"
+  integrity sha512-ulr8rNLA6rkyFAlVWw2q5YJ91v098AFQ2R0PRFwPzREXOUJQPtFUG0t+/ZikhaOCDqFoDhN6/v8Sq0o4araFAw==
   dependencies:
     esbuild "^0.18.10"
     postcss "^8.4.27"
