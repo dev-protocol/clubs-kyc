@@ -1,0 +1,74 @@
+{
+	"name": "clubs-kyc",
+	"version": "1.0.0",
+	"type": "module",
+	"description": "Clubs KYC Service",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"test": "ava || echo 'Skip'",
+		"pretest": "tsc",
+		"prebuild": "rimraf dist",
+		"lint": "yarn lint:eslint && yarn lint:format",
+		"lint:eslint": "eslint . --ext .ts,.js --fix",
+		"lint:format": "prettier --write '**/*.{ts,js,json,md,yml}'",
+		"typecheck": "astro check && tsc --noEmit",
+		"prepare": "husky install"
+	},
+	"author": "Dev Protocol",
+	"license": "MPL-2.0",
+	"dependencies": {
+		"@astrojs/vercel": "^5.0.0",
+		"@devprotocol/dev-kit": "8.5.1",
+		"@devprotocol/util-ts": "4.0.0",
+		"astro": "^3.0.12",
+		"bignumber.js": "^9.1.2",
+		"cross-fetch": "^4.0.0",
+		"ethers": "^6.7.1",
+		"ramda": "0.29.0",
+		"redis": "^4.6.8"
+	},
+	"devDependencies": {
+		"@astrojs/check": "^0.2.0",
+		"@ava/typescript": "4.1.0",
+		"@types/dotenv": "8.2.0",
+		"@types/node": "18.18.1",
+		"@types/ramda": "0.29.5",
+		"@typescript-eslint/eslint-plugin": "6.7.3",
+		"@typescript-eslint/parser": "6.7.3",
+		"@vercel/node": "^3.0.0",
+		"ava": "5.3.1",
+		"dotenv": "16.3.1",
+		"eslint": "8.50.0",
+		"eslint-config-prettier": "9.0.0",
+		"eslint-plugin-functional": "6.0.0",
+		"husky": "8.0.3",
+		"prettier": "3.0.3",
+		"rimraf": "5.0.5",
+		"type-fest": "^4.3.1",
+		"typescript": "5.2.2"
+	},
+	"ava": {
+		"files": [
+			"**/*.test.ts"
+		],
+		"typescript": {
+			"rewritePaths": {
+				"/": "dist/"
+			},
+			"compile": false
+		}
+	},
+	"private": true,
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/dev-protocol/clubs-kyc.git"
+	},
+	"bugs": {
+		"url": "https://github.com/dev-protocol/clubs-kyc/issues"
+	},
+	"homepage": "https://github.com/dev-protocol/clubs-kyc#readme"
+}
