@@ -1,12 +1,12 @@
 export const json = {
-  'content-type': 'application/json;charset=UTF-8',
+	'content-type': 'application/json;charset=UTF-8',
 }
 
 export const cors = {
-  'access-control-allow-origin': '*',
+	'access-control-allow-origin': '*',
 }
 
 export const headers = {
-  ...json,
-  ...cors,
+	...json,
+	...cors,
 }
