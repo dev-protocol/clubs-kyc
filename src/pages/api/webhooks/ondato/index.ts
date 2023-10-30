@@ -17,7 +17,11 @@ type RequestBody = ReadonlyDeep<{
 	z?: string
 }>
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, clientAddress }) => {
+	console.log('Request headers', Object.fromEntries(request.headers))
+	console.log('Request body', await request.json())
+	console.log('IP address', clientAddress)
+
 	const body = await request
 		.json()
 		.then((x) => x as RequestBody)
