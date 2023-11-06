@@ -1,5 +1,3 @@
-/* eslint-disable functional/functional-parameters */
-
 import fetch from 'node-fetch'
 
 type OndatoResponseType = Readonly<{
@@ -9,8 +7,11 @@ type OndatoResponseType = Readonly<{
 	access_token: string
 }>
 
-export const getAccessToken = async (): Promise<Error | OndatoResponseType> => {
-	const url = `${import.meta.env.API_URL}connect/token`
+// TODO: save this in the db to avoid issuing new token when a token is valid for 24 hrs.
+export const getAccessToken = async (
+	userAddress: string,
+): Promise<Error | OndatoResponseType> => {
+	const url = `${import.meta.env.API_URL}/connect/token`
 	const headers = {
 		'Content-Type': 'application/x-www-form-urlencoded',
 	}
@@ -21,14 +22,15 @@ export const getAccessToken = async (): Promise<Error | OndatoResponseType> => {
 		scope: 'idv_api kyc_identifications_api',
 	})
 
-	// TODO: save this in the db to avoid issuing new token when a token is valid for 24 hrs.
-
-	return await fetch(url, {
-		method: 'POST',
-		headers,
-		body: body,
-	})
-		.then((res) => res.json())
-		.then((res) => res as OndatoResponseType)
-		.catch((error) => new Error(error))
+	// If user address not found, do not query for access token.
+	return !userAddress
+		? new Error('Missing data')
+		: await fetch(url, {
+				method: 'POST',
+				headers,
+				body: body,
+		  })
+				.then((res) => res.json())
+				.then((res) => res as OndatoResponseType)
+				.catch((error) => new Error(error))
 }
