@@ -37,7 +37,7 @@ export const GET = async ({ request }: { request: Request }) => {
 
 					await client.quit()
 
-					return new Response(json({ user }), {
+					return new Response(json({ status: user.status }), {
 						status: 200,
 						headers,
 					})
