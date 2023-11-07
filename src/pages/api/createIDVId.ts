@@ -27,8 +27,8 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 
 	const userAddress = whenNotError(
 		params,
-		(params) =>
-			whenDefinedAll([params.hash, params.signature], ([hash, signature]) =>
+		(_params) =>
+			whenDefinedAll([_params.hash, _params.signature], ([hash, signature]) =>
 				recoverAddress(hashMessage(hash), signature),
 			) ?? new Error('Invalid request or missing data'),
 	)
@@ -36,16 +36,16 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 	// GET Ondato access token.
 	const accessToken = await whenNotError(
 		userAddress,
-		(userAddress) =>
-			whenDefined(userAddress, (userAddress) => getAccessToken(userAddress)) ??
+		(_userAddress) =>
+			whenDefined(_userAddress, (_address) => getAccessToken(_address)) ??
 			new Error('Try again later'),
 	)
 	// Get ondato idvid for url generation.
 	const idvId = await whenNotErrorAll(
 		[userAddress, accessToken],
-		([userAddress, accessToken]) =>
-			whenDefinedAll([userAddress, accessToken], ([userAddress, accessToken]) =>
-				getIDVId(accessToken.access_token, userAddress),
+		([_userAddress, _accessToken]) =>
+			whenDefinedAll([_userAddress, _accessToken], ([_address, _token]) =>
+				getIDVId(_token.access_token, _address),
 			) ?? new Error('Invalid address or access token'),
 	)
 
@@ -53,9 +53,9 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 	const db = await whenNotErrorAll([userAddress, idvId], always(redis()))
 	const result = whenNotErrorAll(
 		[userAddress, idvId, db],
-		([userAddress, idvId, db]) =>
-			whenDefinedAll([userAddress, idvId, db], ([userAddress, idvId, db]) =>
-				db.set(userAddress, idvId.id),
+		([_userAddress, _idvId, _db]) =>
+			whenDefinedAll([_userAddress, _idvId, _db], ([_address, _id, _d]) =>
+				_d.set(_address, _id.id),
 			) ?? Error('Could not get KYC verified, try again later!'),
 	)
 
