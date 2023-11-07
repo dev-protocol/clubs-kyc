@@ -47,8 +47,6 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 		client.quit().catch((err) => new Error(err)),
 	)
 
-	db.set('test', 'test')
-
 	console.log({ result })
 
 	return new Response(
