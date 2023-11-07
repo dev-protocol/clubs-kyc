@@ -29,7 +29,8 @@
 		"ethers": "^6.7.1",
 		"node-fetch": "^3.3.2",
 		"ramda": "0.29.1",
-		"redis": "^4.6.8"
+		"redis": "^4.6.8",
+		"uuid": "^9.0.1"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.3.0",
@@ -37,6 +38,7 @@
 		"@types/dotenv": "8.2.0",
 		"@types/node": "20.8.10",
 		"@types/ramda": "0.29.7",
+		"@types/uuid": "^9.0.6",
 		"@typescript-eslint/eslint-plugin": "6.10.0",
 		"@typescript-eslint/parser": "6.10.0",
 		"@vercel/node": "^3.0.0",
