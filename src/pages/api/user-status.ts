@@ -30,22 +30,19 @@ export const GET = async ({ request }: { request: Request }) => {
 			 */
 			const recordKey = await client.hGet('index:address', _address)
 
-			// eslint-disable-next-line functional/no-conditional-statements
-			if (!recordKey) {
-				return new Response(json({ data: null, message: 'not found' }), {
-					status: 404,
-				})
-			}
+			return (
+				whenDefined(recordKey, async (key) => {
+					// get status and cast to UserStatus
+					const user = (await client.hGetAll(key)) as User
 
-			// get status and cast to UserStatus
-			const user = (await client.hGetAll(recordKey)) as User
+					await client.quit()
 
-			await client.quit()
-
-			return new Response(json({ user }), {
-				status: 200,
-				headers,
-			})
+					return new Response(json({ user }), {
+						status: 200,
+						headers,
+					})
+				}) ?? new Response(json({ data: null, message: 'not found' }))
+			)
 		}) ??
 		new Response(json({ data: null, message: 'address is required' }), {
 			status: 400,
