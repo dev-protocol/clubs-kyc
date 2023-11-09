@@ -1,20 +1,17 @@
 import type { APIRoute } from 'astro'
 import { json } from 'utils/json'
 import { headers } from 'utils/headers'
-import {
-	whenDefinedAll,
-	whenNotError,
-	whenNotErrorAll,
-} from '@devprotocol/util-ts'
-import { always } from 'ramda'
+import { whenDefinedAll, whenNotErrorAll } from '@devprotocol/util-ts'
 import type { ReadonlyDeep } from 'type-fest'
 import { auth } from 'utils/auth'
 import { redis } from 'utils/db'
+import { v4 as uuidv4 } from 'uuid'
 
 type RequestBody = ReadonlyDeep<{
-	x?: string
-	y?: string
-	z?: string
+	payload?: {
+		status?: string
+		identityVerificationId?: string
+	}
 }>
 
 export const POST: APIRoute = async ({ request, clientAddress }) => {
@@ -27,35 +24,57 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 		.then((x) => x as RequestBody)
 		.catch((err) => new Error(err))
 
-	const props = whenNotError(
-		body,
-		(data) =>
-			whenDefinedAll([data.x, data.y, data.z], ([x, y, z]) => ({
-				x,
-				y,
-				z,
-			})) ?? new Error('Missing a required data'),
-	)
+	return (
+		whenNotErrorAll(
+			[auth(request), await redis(), body],
+			([, client, data]) =>
+				whenDefinedAll(
+					[data.payload?.status, data.payload?.identityVerificationId],
+					async ([status, idv]) => {
+						const data = {
+							status,
+							idv,
+						}
 
-	const isValidRequest = auth(request)
-		? true
-		: new Error('Authentication failed')
+						/**
+						 * gererate a unique key for the record
+						 */
+						const recordKey = uuidv4()
 
-	const db = await whenNotError(isValidRequest, always(redis()))
+						/**
+						 * set the record data in redis
+						 */
+						// eslint-disable-next-line functional/no-expression-statements
+						await client.hSet(recordKey, data)
 
-	const result = await whenNotErrorAll([db, props], ([client]) =>
-		client.quit().catch((err) => new Error(err)),
-	)
+						/**
+						 * set the index in redis
+						 */
+						// eslint-disable-next-line functional/no-expression-statements
+						await client.hSet('index:ondatoVerificationId', data.idv, recordKey)
+						// eslint-disable-next-line functional/no-expression-statements
+						await client.quit()
 
-	console.log({ result })
-
-	return new Response(
-		result instanceof Error
-			? json({ data: null, message: result.message })
-			: json({ data: result, message: 'success' }),
-		{
-			status: result instanceof Error ? 400 : 200,
-			headers,
-		},
+						return new Response(
+							json({ data: null, message: 'Authentication failed' }),
+							{ status: 200, headers },
+						)
+					},
+				) ??
+				new Response(
+					json({ data: null, message: 'Payload params undefined' }),
+					{
+						status: 401,
+						headers,
+					},
+				),
+		) ??
+		new Response(
+			json({ data: null, message: 'Auth or redis or body parsing failed' }),
+			{
+				status: 401,
+				headers,
+			},
+		)
 	)
 }
