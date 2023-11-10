@@ -15,7 +15,8 @@
 		"lint:eslint": "eslint . --ext .ts,.js --fix",
 		"lint:format": "prettier --write '**/*.{ts,js,json,md,yml}'",
 		"typecheck": "astro check && tsc --noEmit",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"createRedisSchema": "node ./scripts/createRedisSchema.mjs"
 	},
 	"author": "Dev Protocol",
 	"license": "MPL-2.0",
