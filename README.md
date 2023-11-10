@@ -18,3 +18,7 @@ Create a repository using this template; just runs following command.
 ```bash
 yarn
 ```
+
+## Setup the Redis Schema
+
+Run `npm run createRedisSchema`.
