@@ -40,6 +40,7 @@ const createRedisSchema = async () => {
 	try {
 		const indexCreated = await client.ft.create('id:user', schema, {
 			ON: 'JSON',
+			PREFIX: 'user',
 		})
 
 		// eslint-disable-next-line functional/no-conditional-statements
