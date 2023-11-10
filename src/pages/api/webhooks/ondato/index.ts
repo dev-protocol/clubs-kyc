@@ -6,15 +6,17 @@ import {
 	whenNotError,
 	whenNotErrorAll,
 } from '@devprotocol/util-ts'
-import { always } from 'ramda'
 import type { ReadonlyDeep } from 'type-fest'
 import { auth } from 'utils/auth'
 import { redis } from 'utils/db'
+import { v4 as uuidv4 } from 'uuid'
+import { always } from 'ramda'
 
 type RequestBody = ReadonlyDeep<{
-	x?: string
-	y?: string
-	z?: string
+	payload?: {
+		status?: string
+		identityVerificationId?: string
+	}
 }>
 
 export const POST: APIRoute = async ({ request, clientAddress }) => {
@@ -27,35 +29,59 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 		.then((x) => x as RequestBody)
 		.catch((err) => new Error(err))
 
-	const props = whenNotError(
-		body,
-		(data) =>
-			whenDefinedAll([data.x, data.y, data.z], ([x, y, z]) => ({
-				x,
-				y,
-				z,
-			})) ?? new Error('Missing a required data'),
-	)
-
 	const isValidRequest = auth(request)
 		? true
 		: new Error('Authentication failed')
 
-	const db = await whenNotError(isValidRequest, always(redis()))
+	const db = await redis()
 
-	const result = await whenNotErrorAll([db, props], ([client]) =>
-		client.quit().catch((err) => new Error(err)),
+	const props = whenNotError(
+		body,
+		(data) =>
+			whenDefinedAll(
+				[data.payload?.status, data.payload?.identityVerificationId],
+				([status, idv]) => ({
+					status,
+					idv,
+				}),
+			) ?? new Error('Payload params undefined'),
 	)
 
-	console.log({ result })
+	/**
+	 * gererate a unique key for the record
+	 */
+	const recordKey = uuidv4()
 
-	return new Response(
-		result instanceof Error
-			? json({ data: null, message: result.message })
-			: json({ data: result, message: 'success' }),
-		{
-			status: result instanceof Error ? 400 : 200,
-			headers,
+	const result = await whenNotErrorAll(
+		[props, db, isValidRequest],
+		async ([data, client]) => {
+			/**
+			 * set the record data in redis
+			 */
+			const setRecord = await client
+				.hSet(recordKey, data)
+				.catch((err) => new Error(err))
+
+			/**
+			 * set the index in redis
+			 */
+			const setIndex = await whenNotError(
+				setRecord,
+				always(client.hSet('index:ondatoVerificationId', data.idv, recordKey)),
+			)
+			const quit = await client.quit().catch((err) => new Error(err))
+
+			return whenNotErrorAll([setIndex, quit], always(true))
 		},
 	)
+
+	return result instanceof Error
+		? new Response(json({ data: null, message: result.message }), {
+				status: 401,
+				headers,
+		  })
+		: new Response(json({ data: null, message: 'Success' }), {
+				status: 200,
+				headers,
+		  })
 }
