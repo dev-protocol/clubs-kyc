@@ -9,7 +9,6 @@ import {
 import type { ReadonlyDeep } from 'type-fest'
 import { auth } from 'utils/auth'
 import { redis } from 'utils/db'
-import { v4 as uuidv4 } from 'uuid'
 import { always } from 'ramda'
 
 type RequestBody = ReadonlyDeep<{
@@ -47,31 +46,35 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 			) ?? new Error('Payload params undefined'),
 	)
 
-	/**
-	 * gererate a unique key for the record
-	 */
-	const recordKey = uuidv4()
-
 	const result = await whenNotErrorAll(
 		[props, db, isValidRequest],
 		async ([data, client]) => {
 			/**
-			 * set the record data in redis
+			 * Fetch the record with the matching idv
 			 */
-			const setRecord = await client
-				.hSet(recordKey, data)
-				.catch((err) => new Error(err))
+			const records = await client.ft.search(
+				'id:user',
+				`@ondatoVerificationId:${data.idv}`,
+			)
 
 			/**
-			 * set the index in redis
+			 * Loop through each and update the status
 			 */
-			const setIndex = await whenNotError(
-				setRecord,
-				always(client.hSet('index:ondatoVerificationId', data.idv, recordKey)),
-			)
+			const updateStatus = await whenNotError(records, async (_records) => {
+				const promises = _records.documents.map((record) => {
+					const updatedRecord = {
+						...record.value,
+						status: data.status,
+					}
+					return client.json.set(record.id, '$', updatedRecord)
+				})
+
+				return await Promise.all(promises)
+			})
+
 			const quit = await client.quit().catch((err) => new Error(err))
 
-			return whenNotErrorAll([setIndex, quit], always(true))
+			return whenNotErrorAll([updateStatus, quit], always(true))
 		},
 	)
 
