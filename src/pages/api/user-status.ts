@@ -22,7 +22,6 @@ export const GET = async ({ request }: { request: Request }) => {
 			/**
 			 * fetch user status based on address
 			 */
-			// const recordKey = await client.hGet('index:address', _address)
 			const records = await client.ft.search('id:user', `@address:${_address}`)
 
 			return (
