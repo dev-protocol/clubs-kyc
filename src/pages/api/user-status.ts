@@ -3,12 +3,6 @@ import { headers } from 'utils/headers'
 import { createClient } from 'redis'
 import { whenDefined } from '@devprotocol/util-ts'
 
-type User = Readonly<{
-	address: string
-	status: string
-	ondatoVerificationId: string
-}>
-
 export const GET = async ({ request }: { request: Request }) => {
 	const url = new URL(request.url)
 
@@ -28,16 +22,19 @@ export const GET = async ({ request }: { request: Request }) => {
 			/**
 			 * fetch user status based on address
 			 */
-			const recordKey = await client.hGet('index:address', _address)
+			const records = await client.ft.search('id:user', `@address:${_address}`)
 
 			return (
-				whenDefined(recordKey, async (key) => {
-					// get status and cast to UserStatus
-					const user = (await client.hGetAll(key)) as User
+				whenDefined(records, async (_records) => {
+					const statuses = _records.documents.map((record) => ({
+						status: record.value.status,
+						address: record.value.address,
+					}))
 
+					// eslint-disable-next-line functional/no-expression-statements
 					await client.quit()
 
-					return new Response(json({ status: user.status }), {
+					return new Response(json([...statuses]), {
 						status: 200,
 						headers,
 					})

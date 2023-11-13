@@ -13,6 +13,7 @@ import { hashMessage, recoverAddress } from 'ethers'
 import { redis } from 'utils/db'
 import { getIDVId } from 'utils/getIDVId'
 import { getAccessToken } from 'utils/getAccessToken'
+import { v4 as uuidv4 } from 'uuid'
 
 type RequestBody = Readonly<{
 	hash: string
@@ -54,8 +55,16 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 	const result = whenNotErrorAll(
 		[userAddress, idvId, db],
 		([_userAddress, _idvId, _db]) =>
-			whenDefinedAll([_userAddress, _idvId, _db], ([_address, _id, _d]) =>
-				_d.set(_address, _id.id),
+			whenDefinedAll(
+				[_userAddress, _idvId, _db],
+				async ([_address, _id, _d]) => {
+					const recordKey = `user:${uuidv4()}`
+					const data = {
+						address: _address,
+						ondatoVerificationId: _id.id,
+					}
+					return await _d.json.set(recordKey, '$', data)
+				},
 			) ?? Error('Could not get KYC verified, try again later!'),
 	)
 
