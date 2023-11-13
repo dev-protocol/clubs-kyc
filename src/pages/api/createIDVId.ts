@@ -58,7 +58,7 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 			whenDefinedAll(
 				[_userAddress, _idvId, _db],
 				async ([_address, _id, _d]) => {
-					const recordKey = uuidv4()
+					const recordKey = `user:${uuidv4()}`
 					const data = {
 						address: _address,
 						ondatoVerificationId: _id.id,
