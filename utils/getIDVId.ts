@@ -14,7 +14,7 @@ export const getIDVId = async (
 		Authorization: `Bearer ${accessToken}`,
 	}
 	const body = JSON.stringify({
-		externalReferenceId: `${Date.now()}:${userAddress}`,
+		externalReferenceId: `${userAddress}`,
 		registration: {
 			address: userAddress,
 		},
