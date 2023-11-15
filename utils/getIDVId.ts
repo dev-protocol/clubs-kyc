@@ -1,4 +1,5 @@
 import fetch from 'node-fetch'
+import { v4 as uuidv4 } from 'uuid'
 
 type OndatoResponseType = Readonly<{
 	id: string
@@ -14,7 +15,7 @@ export const getIDVId = async (
 		Authorization: `Bearer ${accessToken}`,
 	}
 	const body = JSON.stringify({
-		externalReferenceId: `${userAddress}`,
+		externalReferenceId: `${uuidv4()}`,
 		registration: {
 			address: userAddress,
 		},
