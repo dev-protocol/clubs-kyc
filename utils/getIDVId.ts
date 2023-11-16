@@ -29,7 +29,6 @@ export const getIDVId = async (
 		headers,
 		body: body,
 	})
-		.then(res => { console.log('Res', res); return res })
 		.then((res) => res.json())
 		.then((res) => res as OndatoResponseType)
 		.catch((error) => new Error(error))
