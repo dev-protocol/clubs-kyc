@@ -4,6 +4,7 @@ export const json = {
 
 export const cors = {
 	'access-control-allow-origin': '*',
+	'Access-Control-Allow-Headers': 'Content-Type',
 }
 
 export const headers = {
