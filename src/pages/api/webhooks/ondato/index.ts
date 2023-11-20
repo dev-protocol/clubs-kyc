@@ -57,6 +57,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 				`@ondatoVerificationId:${data.idv}`,
 			)
 
+			console.log({ records })
+
 			/**
 			 * Loop through each and update the status
 			 */
@@ -72,13 +74,17 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 				return await Promise.all(promises)
 			})
 
+			console.log({ updateStatus })
+
 			const quit = await client.quit().catch((err) => new Error(err))
+
+			console.log({ quit })
 
 			return whenNotErrorAll([updateStatus, quit], always(true))
 		},
 	)
 
-	console.log({ result })
+	console.log({ result, body, isValidRequest, db, props })
 
 	return result instanceof Error
 		? new Response(json({ data: null, message: result.message }), {
