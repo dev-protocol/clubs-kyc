@@ -20,13 +20,14 @@ type RequestBody = ReadonlyDeep<{
 
 export const POST: APIRoute = async ({ request, clientAddress }) => {
 	console.log('Request headers', Object.fromEntries(request.headers))
-	console.log('Request body', await request.json().catch((err) => err))
 	console.log('IP address', clientAddress)
 
 	const body = await request
 		.json()
 		.then((x) => x as RequestBody)
 		.catch((err) => new Error(err))
+
+	console.log('Request body', body)
 
 	const isValidRequest = auth(request)
 		? true
