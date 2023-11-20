@@ -78,3 +78,7 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 		},
 	)
 }
+
+export const OPTIONS: APIRoute = async ({ request }: { request: Request }) => {
+	return new Response(json({}), { status: request ? 200 : 400, headers })
+}
