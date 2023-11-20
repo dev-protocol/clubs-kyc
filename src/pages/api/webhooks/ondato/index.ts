@@ -7,7 +7,7 @@ import {
 	whenNotErrorAll,
 } from '@devprotocol/util-ts'
 import type { ReadonlyDeep } from 'type-fest'
-import { auth } from 'utils/auth'
+import { auth } from './auth'
 import { redis } from 'utils/db'
 import { always } from 'ramda'
 
@@ -29,7 +29,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 
 	console.log('Request body', body)
 
-	const isValidRequest = auth(request)
+	const isValidRequest = auth(clientAddress)
 		? true
 		: new Error('Authentication failed')
 
