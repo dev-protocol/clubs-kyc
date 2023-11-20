@@ -52,7 +52,7 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 
 	// Save ondato idvid for url generation mapped with user address.
 	const db = await whenNotErrorAll([userAddress, idvId], always(redis()))
-	const result = whenNotErrorAll(
+	const result = await whenNotErrorAll(
 		[userAddress, idvId, db],
 		([_userAddress, _idvId, _db]) =>
 			whenDefinedAll(
