@@ -78,6 +78,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 		},
 	)
 
+	console.log({ result })
+
 	return result instanceof Error
 		? new Response(json({ data: null, message: result.message }), {
 				status: 401,

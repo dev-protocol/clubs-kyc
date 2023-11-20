@@ -68,6 +68,8 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 			) ?? Error('Could not get KYC verified, try again later!'),
 	)
 
+	console.log({ result })
+
 	return new Response(
 		result instanceof Error
 			? json({ data: null, message: result })
