@@ -12,10 +12,12 @@ import { redis } from 'utils/db'
 import { always } from 'ramda'
 
 type RequestBody = ReadonlyDeep<{
-	payload?: {
+	payload: {
 		status?: string
 		identityVerificationId?: string
+		externalReferenceId?: string
 	}
+	type: string
 }>
 
 export const POST: APIRoute = async ({ request, clientAddress }) => {
@@ -38,13 +40,12 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 	const props = whenNotError(
 		body,
 		(data) =>
-			whenDefinedAll(
-				[data.payload?.status, data.payload?.identityVerificationId],
-				([status, idv]) => ({
-					status,
-					idv,
-				}),
-			) ?? new Error('Payload params undefined'),
+			whenDefinedAll([data.payload, data.type], ([payload, type]) => ({
+				status: payload.status,
+				idv: payload.identityVerificationId,
+				externalReferenceId: payload.externalReferenceId,
+				type: type,
+			})) ?? new Error('Webhook payload params undefined'),
 	)
 
 	const result = await whenNotErrorAll(
@@ -55,7 +56,9 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 			 */
 			const records = await client.ft.search(
 				'id:user',
-				`@ondatoVerificationId:${data.idv}`,
+				data.idv && data.idv !== '' // Use idv when defined, else use externalReferenceId
+					? `@ondatoVerificationId:${data.idv}`
+					: `@ondatoExternalReferenceId:${data.externalReferenceId}`,
 			)
 
 			console.log({ records })
