@@ -37,6 +37,6 @@ export const getIDVId = async (
 	})
 		.then((res) => res.json())
 		.then((res) => res as OndatoResponseType)
-		.then((res) => ({ ...res, externalReferenceId } as ReturnType))
+		.then((res) => ({ ...res, externalReferenceId }) as ReturnType)
 		.catch((error) => new Error(error))
 }
