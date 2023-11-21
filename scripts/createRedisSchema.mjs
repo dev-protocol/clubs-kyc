@@ -16,6 +16,10 @@ const createRedisSchema = async () => {
 			type: SchemaFieldTypes.TEXT,
 			AS: 'ondatoVerificationId',
 		},
+		'$.ondatoExternalReferenceId': {
+			type: SchemaFieldTypes.TEXT,
+			AS: 'ondatoExternalReferenceId',
+		},
 		'$.status': {
 			type: SchemaFieldTypes.TEXT,
 			AS: 'status',
