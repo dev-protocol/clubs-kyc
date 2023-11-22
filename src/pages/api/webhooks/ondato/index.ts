@@ -57,6 +57,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 			/**
 			 * Fetch the record with the matching idv
 			 */
+			console.log('IDV data', data)
 			const records = await client.ft.search(
 				'id:user',
 				data.idv && data.idv !== '' // Use idv when defined, else use externalReferenceId
