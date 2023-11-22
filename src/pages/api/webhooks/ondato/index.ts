@@ -57,7 +57,9 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 			/**
 			 * Fetch the record with the matching idv
 			 */
-			console.log('IDV data', data, 'check', data.idv && data.idv !== '')
+			console.log('IDV data', data, 'check', data.idv && data.idv !== '', 'condition', data.idv && data.idv !== ''
+			? `@ondatoVerificationId:${data.idv}`
+			: `@ondatoExternalReferenceId:${data.externalReferenceId}`)
 			const records = await client.ft.search(
 				'id:user',
 				data.idv && data.idv !== '' // Use idv when defined, else use externalReferenceId
