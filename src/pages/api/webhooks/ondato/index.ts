@@ -13,7 +13,7 @@ import { always } from 'ramda'
 
 type RequestBody = ReadonlyDeep<{
 	payload: {
-		status?: string
+		status: string
 		identityVerificationId?: string
 		externalReferenceId?: string
 	}
@@ -40,12 +40,15 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 	const props = whenNotError(
 		body,
 		(data) =>
-			whenDefinedAll([data.payload, data.type], ([payload, type]) => ({
-				status: payload.status,
-				idv: payload.identityVerificationId,
-				externalReferenceId: payload.externalReferenceId,
-				type: type,
-			})) ?? new Error('Webhook payload params undefined'),
+			whenDefinedAll(
+				[data.payload, data.type, data.payload.status],
+				([payload, type, status]) => ({
+					status: status,
+					idv: payload.identityVerificationId,
+					externalReferenceId: payload.externalReferenceId,
+					type: type,
+				}),
+			) ?? new Error('Webhook payload params undefined'),
 	)
 
 	const result = await whenNotErrorAll(
