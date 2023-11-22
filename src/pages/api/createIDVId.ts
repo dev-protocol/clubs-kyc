@@ -62,6 +62,7 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 					const data = {
 						address: _address,
 						ondatoVerificationId: _id.id,
+						ondatoExternalReferenceId: _id.externalReferenceId,
 					}
 					return await _d.json.set(recordKey, '$', data)
 				},
