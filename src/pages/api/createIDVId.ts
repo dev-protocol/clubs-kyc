@@ -19,6 +19,13 @@ type RequestBody = Readonly<{
 	signature: string
 }>
 
+type KYCStatus = Readonly<{
+	status: string
+	ondatoVerificationId: string
+	ondatoExternalReferenceId: string
+	address: string
+}>
+
 export const POST: APIRoute = async ({ request }: { request: Request }) => {
 	const params = await request
 		.json()
@@ -33,26 +40,49 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 			) ?? new Error('Invalid request or missing data'),
 	)
 
+	// Fetch db.
+	const db = await whenNotErrorAll([userAddress, params], always(redis()))
+
+	// Check for previous kyc status.
+	// **NOTE: true if request is valid (i.e kyc not in process already). Error other wise**
+	const isEligibleForNewIdvid: true | Error = await whenNotErrorAll(
+		[userAddress, db],
+		([_userAddress, _db]) =>
+			whenDefinedAll([_userAddress, _db], async ([_address, _d]) => {
+				const recordKey = `user:${_address}`
+				const kycStatus = await _d.json
+					.get(recordKey)
+					.then((res) => res as KYCStatus)
+					.catch((err) => new Error(err))
+				return kycStatus instanceof Error ||
+					kycStatus.status === 'Completed' ||
+					kycStatus.status === 'Approved'
+					? new Error(
+							kycStatus instanceof Error ? kycStatus.message : 'KYC in process',
+					  )
+					: true
+			}) ?? new Error('Could not fetch user status'),
+	)
+
 	// GET Ondato access token.
-	const accessToken = await whenNotError(
-		userAddress,
-		(_userAddress) =>
+	const accessToken = await whenNotErrorAll(
+		[userAddress, isEligibleForNewIdvid],
+		([_userAddress]) =>
 			whenDefined(_userAddress, (_address) => getAccessToken(_address)) ??
 			new Error('Try again later'),
 	)
+
 	// Get ondato idvid for url generation.
 	const idvId = await whenNotErrorAll(
-		[userAddress, accessToken],
+		[userAddress, accessToken, isEligibleForNewIdvid],
 		([_userAddress, _accessToken]) =>
 			whenDefinedAll([_userAddress, _accessToken], ([_address, _token]) =>
 				getIDVId(_token.access_token, _address),
 			) ?? new Error('Invalid address or access token'),
 	)
 
-	// Save ondato idvid for url generation mapped with user address.
-	const db = await whenNotErrorAll([userAddress, idvId], always(redis()))
 	const result = await whenNotErrorAll(
-		[userAddress, idvId, db],
+		[userAddress, idvId, db, isEligibleForNewIdvid],
 		([_userAddress, _idvId, _db]) =>
 			whenDefinedAll(
 				[_userAddress, _idvId, _db],
