@@ -1,7 +1,10 @@
 import { json } from 'utils/json'
-import { headers } from 'utils/headers'
 import { createClient } from 'redis'
 import { whenDefined } from '@devprotocol/util-ts'
+
+type KYCStatus = Readonly<{
+	status: string
+}>
 
 export const GET = async ({ request }: { request: Request }) => {
 	const url = new URL(request.url)
@@ -19,26 +22,13 @@ export const GET = async ({ request }: { request: Request }) => {
 			})
 			await client.connect()
 
-			/**
-			 * fetch user status based on address
-			 */
-			const records = await client.ft.search('id:user', `@address:${_address}`)
+			const record = (await client.json.get(`user:${_address}`)) as KYCStatus
 
-			return (
-				whenDefined(records, async (_records) => {
-					const statuses = _records.documents.map((record) => ({
-						status: record.value.status,
-						address: record.value.address,
-					}))
-
-					// eslint-disable-next-line functional/no-expression-statements
-					await client.quit()
-
-					return new Response(json([...statuses]), {
-						status: 200,
-						headers,
-					})
-				}) ?? new Response(json({ data: null, message: 'not found' }))
+			return new Response(
+				json({ data: { status: record?.status || 'Unverified' } }),
+				{
+					status: 200,
+				},
 			)
 		}) ??
 		new Response(json({ data: null, message: 'address is required' }), {
