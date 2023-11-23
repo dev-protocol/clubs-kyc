@@ -1,6 +1,8 @@
-import { json } from 'utils/json'
 import { createClient } from 'redis'
 import { whenDefined } from '@devprotocol/util-ts'
+
+import { json } from 'utils/json'
+import { headers } from 'utils/headers'
 
 type KYCStatus = Readonly<{
 	status: string
@@ -28,6 +30,7 @@ export const GET = async ({ request }: { request: Request }) => {
 				json({ data: { status: record?.status || 'Unverified' } }),
 				{
 					status: 200,
+					headers,
 				},
 			)
 		}) ??
