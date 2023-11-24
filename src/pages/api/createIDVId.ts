@@ -54,9 +54,11 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 					.get(recordKey)
 					.then((res) => res as KYCStatus)
 					.catch((err) => new Error(err))
-				return kycStatus instanceof Error ||
-					kycStatus.status === 'Completed' ||
-					kycStatus.status === 'Approved'
+
+				return kycStatus &&
+					(kycStatus instanceof Error ||
+						kycStatus.status === 'Completed' ||
+						kycStatus.status === 'Approved')
 					? new Error(
 							kycStatus instanceof Error ? kycStatus.message : 'KYC in process',
 					  )
