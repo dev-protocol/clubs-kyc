@@ -1,5 +1,5 @@
 import { createClient } from 'redis'
-import { whenDefined } from '@devprotocol/util-ts'
+import { isNotError, whenDefined, whenNotErrorAll } from '@devprotocol/util-ts'
 
 import { json } from 'utils/json'
 import { headers } from 'utils/headers'
@@ -25,9 +25,17 @@ export const GET = async ({ request }: { request: Request }) => {
 			await client.connect()
 
 			const record = (await client.json.get(`user:${_address}`)) as KYCStatus
+			const quit = await client.quit().catch((err) => new Error(err))
+			const result = whenNotErrorAll([record, quit], ([rec]) => rec)
 
 			return new Response(
-				json({ data: { status: record?.status || 'Unverified' } }),
+				json({
+					data: {
+						status: isNotError(result)
+							? result?.status || 'Unverified'
+							: 'Unverified',
+					},
+				}),
 				{
 					status: 200,
 					headers,

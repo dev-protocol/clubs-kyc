@@ -95,7 +95,9 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 						ondatoVerificationId: _id.id,
 						ondatoExternalReferenceId: _id.externalReferenceId,
 					}
-					return await _d.json.set(recordKey, '$', data)
+					const res = await _d.json.set(recordKey, '$', data)
+					const quit = await _d.quit().catch((err) => new Error(err))
+					return whenNotErrorAll([res, quit], always(true))
 				},
 			) ?? Error('Could not get KYC verified, try again later!'),
 	)
