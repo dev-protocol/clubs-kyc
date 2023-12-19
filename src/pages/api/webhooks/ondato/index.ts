@@ -55,8 +55,10 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 			const records = await client.ft.search(
 				'id:user',
 				data.idv && data.idv !== '' // Use idv when defined, else use externalReferenceId
-					? `@ondatoVerificationId:{${data.idv}}`
-					: `@ondatoExternalReferenceId:{${data.externalReferenceId}}`,
+					? `@ondatoVerificationId:{${data.idv.split('-').join('\\-')}}`
+					: `@ondatoExternalReferenceId:{${data.externalReferenceId
+							?.split('-')
+							?.join('\\-')}}`,
 			)
 
 			// eslint-disable-next-line functional/no-expression-statements
