@@ -29,7 +29,7 @@ export const getAccessToken = async (
 				method: 'POST',
 				headers,
 				body: body,
-		  })
+			})
 				.then((res) => res.json())
 				.then((res) => res as OndatoResponseType)
 				.catch((error) => new Error(error))

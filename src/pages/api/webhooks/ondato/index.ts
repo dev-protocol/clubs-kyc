@@ -107,9 +107,9 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 		? new Response(json({ data: null, message: result.message }), {
 				status: 401,
 				headers,
-		  })
+			})
 		: new Response(json({ data: null, message: 'Success' }), {
 				status: 200,
 				headers,
-		  })
+			})
 }

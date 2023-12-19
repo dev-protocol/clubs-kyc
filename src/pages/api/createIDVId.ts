@@ -61,7 +61,7 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 						kycStatus.status === 'Approved')
 					? new Error(
 							kycStatus instanceof Error ? kycStatus.message : 'KYC in process',
-					  )
+						)
 					: true
 			}) ?? new Error('Could not fetch user status'),
 	)
