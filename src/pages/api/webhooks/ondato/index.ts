@@ -21,15 +21,10 @@ type RequestBody = ReadonlyDeep<{
 }>
 
 export const POST: APIRoute = async ({ request, clientAddress }) => {
-	console.log('Request headers', Object.fromEntries(request.headers))
-	console.log('IP address', clientAddress)
-
 	const body = await request
 		.json()
 		.then((x) => x as RequestBody)
 		.catch((err) => new Error(err))
-
-	console.log('Request body', body)
 
 	const isValidRequest = auth(clientAddress)
 		? true
@@ -57,23 +52,16 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 			/**
 			 * Fetch the record with the matching idv
 			 */
-			console.log(
-				'IDV data',
-				data,
-				'check',
-				data.idv && data.idv !== '',
-				'condition',
-				data.idv && data.idv !== ''
-					? `@ondatoVerificationId:${data.idv}`
-					: `@ondatoExternalReferenceId:${data.externalReferenceId}`,
-			)
 			const records = await client.ft.search(
 				'id:user',
 				data.idv && data.idv !== '' // Use idv when defined, else use externalReferenceId
-					? `@ondatoVerificationId:${data.idv}`
-					: `@ondatoExternalReferenceId:${data.externalReferenceId}`,
+					? `@ondatoVerificationId:{${data.idv.split('-').join('\\-')}}`
+					: `@ondatoExternalReferenceId:{${data.externalReferenceId
+							?.split('-')
+							?.join('\\-')}}`,
 			)
 
+			// eslint-disable-next-line functional/no-expression-statements
 			console.log({ records })
 
 			/**
@@ -91,25 +79,21 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 				return await Promise.all(promises)
 			})
 
+			// eslint-disable-next-line functional/no-expression-statements
 			console.log({ updateStatus })
 
 			const quit = await client.quit().catch((err) => new Error(err))
-
-			console.log({ quit })
-
 			return whenNotErrorAll([updateStatus, quit], always(true))
 		},
 	)
-
-	console.log({ result, body, isValidRequest, db, props })
 
 	return result instanceof Error
 		? new Response(json({ data: null, message: result.message }), {
 				status: 401,
 				headers,
-		  })
+			})
 		: new Response(json({ data: null, message: 'Success' }), {
 				status: 200,
 				headers,
-		  })
+			})
 }

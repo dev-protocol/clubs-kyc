@@ -61,7 +61,7 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 						kycStatus.status === 'Approved')
 					? new Error(
 							kycStatus instanceof Error ? kycStatus.message : 'KYC in process',
-					  )
+						)
 					: true
 			}) ?? new Error('Could not fetch user status'),
 	)
@@ -101,8 +101,6 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 				},
 			) ?? Error('Could not get KYC verified, try again later!'),
 	)
-
-	console.log({ result })
 
 	return new Response(
 		result instanceof Error

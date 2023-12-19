@@ -12,7 +12,7 @@ export const GET = async ({ request }: { request: Request }) => {
 	const url = new URL(request.url)
 
 	return (
-		whenDefined(url.searchParams.get('address'), async (_address) => {
+		whenDefined(url.searchParams.get('address'), async (_address: string) => {
 			const client = createClient({
 				url: process.env.REDIS_URL,
 				username: process.env.REDIS_USERNAME ?? '',
@@ -22,6 +22,7 @@ export const GET = async ({ request }: { request: Request }) => {
 					reconnectStrategy: 1,
 				},
 			})
+			// eslint-disable-next-line functional/no-expression-statements
 			await client.connect()
 
 			const record = (await client.json.get(`user:${_address}`)) as KYCStatus

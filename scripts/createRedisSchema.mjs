@@ -13,11 +13,11 @@ const createRedisSchema = async () => {
 			AS: 'address',
 		},
 		'$.ondatoVerificationId': {
-			type: SchemaFieldTypes.TEXT,
+			type: SchemaFieldTypes.TAG,
 			AS: 'ondatoVerificationId',
 		},
 		'$.ondatoExternalReferenceId': {
-			type: SchemaFieldTypes.TEXT,
+			type: SchemaFieldTypes.TAG,
 			AS: 'ondatoExternalReferenceId',
 		},
 		'$.status': {
