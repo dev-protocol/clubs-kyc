@@ -26,6 +26,9 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 		.then((x) => x as RequestBody)
 		.catch((err) => new Error(err))
 
+	// eslint-disable-next-line functional/no-expression-statements
+	console.log({ body })
+
 	const isValidRequest = auth(clientAddress)
 		? true
 		: new Error('Authentication failed')
