@@ -26,9 +26,6 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 		.then((x) => x as RequestBody)
 		.catch((err) => new Error(err))
 
-	// eslint-disable-next-line functional/no-expression-statements
-	console.log({ body })
-
 	const isValidRequest = auth(clientAddress)
 		? true
 		: new Error('Authentication failed')
@@ -48,6 +45,9 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 				}),
 			) ?? new Error('Webhook payload params undefined'),
 	)
+
+	// eslint-disable-next-line functional/no-expression-statements
+	console.log({ props })
 
 	const result = await whenNotErrorAll(
 		[props, db, isValidRequest],
