@@ -32,9 +32,10 @@ export const GET = async ({ request }: { request: Request }) => {
 			return new Response(
 				json({
 					data: {
-						status: isNotError(result)
-							? result?.status || 'Unverified'
-							: 'Unverified',
+						status:
+							result && isNotError(result) && result.status
+								? result.status.toLowerCase()
+								: 'unverified',
 					},
 				}),
 				{

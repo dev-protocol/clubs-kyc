@@ -46,6 +46,9 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 			) ?? new Error('Webhook payload params undefined'),
 	)
 
+	// eslint-disable-next-line functional/no-expression-statements
+	console.log({ props })
+
 	const result = await whenNotErrorAll(
 		[props, db, isValidRequest],
 		async ([data, client]) => {
@@ -69,11 +72,13 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
 			 */
 			const updateStatus = await whenNotError(records, async (_records) => {
 				const promises = _records.documents.map((record) => {
-					const updatedRecord = {
-						...record.value,
-						status: data.status,
-					}
-					return client.json.set(record.id, '$', updatedRecord)
+					const newStatus: string = data.status.toLowerCase()
+					return newStatus === 'completed'
+						? 'OK' // Ignore if status is coming as `COMPLETED`, don't save it in the db.
+						: client.json.set(record.id, '$', {
+								...record.value,
+								status: newStatus,
+							})
 				})
 
 				return await Promise.all(promises)

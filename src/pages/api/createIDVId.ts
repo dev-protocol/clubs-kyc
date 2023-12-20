@@ -53,16 +53,16 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 				const kycStatus = await _d.json
 					.get(recordKey)
 					.then((res) => res as KYCStatus)
+					.then((res) =>
+						res && res.status ? res.status.toLowerCase() : 'unverified',
+					)
 					.catch((err) => new Error(err))
 
-				return kycStatus &&
-					(kycStatus instanceof Error ||
-						kycStatus.status === 'Completed' ||
-						kycStatus.status === 'Approved')
-					? new Error(
-							kycStatus instanceof Error ? kycStatus.message : 'KYC in process',
-						)
-					: true
+				return !kycStatus || kycStatus instanceof Error
+					? new Error('Could not fetch user status')
+					: kycStatus !== 'approved'
+						? true
+						: new Error('KYC is already approved')
 			}) ?? new Error('Could not fetch user status'),
 	)
 
