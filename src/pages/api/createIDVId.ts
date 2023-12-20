@@ -92,6 +92,7 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 					const recordKey = `user:${_address}`
 					const data = {
 						address: _address,
+						status: 'initiated', // This will help UI know that new IDV id has been assigned and process has started.
 						ondatoVerificationId: _id.id,
 						ondatoExternalReferenceId: _id.externalReferenceId,
 					}
