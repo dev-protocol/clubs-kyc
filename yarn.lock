@@ -1224,9 +1224,9 @@
     resolve-from "^5.0.0"
 
 "@vercel/node@^5.0.0":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@vercel/node/-/node-5.2.0.tgz#108f86a86c17dc73a940ad9121dac2affb2bb883"
-  integrity sha512-E8LpLhU13v7tKU+RxXESYtQZDVkt4CepK6uNN7CrzZzEuZqphkC8QrXg1Yrdb9kt8NgJaFjGeBtp9BkiRRC8WA==
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/@vercel/node/-/node-5.2.1.tgz#7217622e8ccb7af9e9a7b584bf6853eea8d021ce"
+  integrity sha512-0+YV01grkqfHIHhmWeCXWmgeP6GsuzXtgWBri3+qESwfAZ6dOTBG4GJp9z2E7sEi+wP60S0/eNGRj8z77uk3JQ==
   dependencies:
     "@edge-runtime/node-utils" "2.3.0"
     "@edge-runtime/primitives" "4.1.0"
@@ -1235,7 +1235,7 @@
     "@vercel/build-utils" "10.6.0"
     "@vercel/error-utils" "2.0.3"
     "@vercel/nft" "0.29.2"
-    "@vercel/static-config" "3.1.0"
+    "@vercel/static-config" "3.1.1"
     async-listen "3.0.0"
     cjs-module-lexer "1.2.3"
     edge-runtime "2.5.9"
@@ -1260,10 +1260,10 @@
   optionalDependencies:
     ajv "^6.12.3"
 
-"@vercel/static-config@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@vercel/static-config/-/static-config-3.1.0.tgz#c7dbb28b8742388157cb45a82b265c1cfe4d6f4e"
-  integrity sha512-NUUdlTvqmCrg+/Kd/T1yONDym3bMiUJW+wlaZoqgUNMANvmIkO10/lk/2fFRQtGkYaPlnM+TUrL+U2FghccHQg==
+"@vercel/static-config@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@vercel/static-config/-/static-config-3.1.1.tgz#176e594bb1b3d8771f52188ffcf6c68a15f9981c"
+  integrity sha512-IRtKnm9N1Uqd2ayIbLPjRtdwcl1GTWvqF1PuEVNm9O43kmoI+m9VpGlW8oga+5LQq1LmJ2Y67zHr7NbjrH1rrw==
   dependencies:
     ajv "8.6.3"
     json-schema-to-ts "1.6.4"
