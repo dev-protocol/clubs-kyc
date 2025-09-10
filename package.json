@@ -38,7 +38,7 @@
 		"@ava/typescript": "5.0.0",
 		"@types/dotenv": "8.2.3",
 		"@types/node": "22.18.1",
-		"@types/ramda": "0.31.0",
+		"@types/ramda": "0.31.1",
 		"@types/uuid": "^10.0.0",
 		"@typescript-eslint/eslint-plugin": "8.43.0",
 		"@typescript-eslint/parser": "8.43.0",
