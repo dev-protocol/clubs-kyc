@@ -39,7 +39,7 @@
 		"@types/dotenv": "8.2.3",
 		"@types/node": "22.18.5",
 		"@types/ramda": "0.31.1",
-		"@types/uuid": "^10.0.0",
+		"@types/uuid": "^11.0.0",
 		"@typescript-eslint/eslint-plugin": "8.44.0",
 		"@typescript-eslint/parser": "8.44.0",
 		"@vercel/node": "^5.0.0",
