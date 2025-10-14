@@ -109,14 +109,14 @@
     which-pm-runs "^1.1.0"
 
 "@astrojs/vercel@^8.0.0":
-  version "8.2.9"
-  resolved "https://registry.yarnpkg.com/@astrojs/vercel/-/vercel-8.2.9.tgz#a1f5fc49b3e28ba59cdb0c6e34a46c00539631a1"
-  integrity sha512-YJ7HTuONufnXFvZsN/USfwkh64b68JO9ZeeuABY90RvsyuKLVvW8Y5pi0qwgwmOf0UtdJAo9BO9cY4cmptkvSQ==
+  version "8.2.10"
+  resolved "https://registry.yarnpkg.com/@astrojs/vercel/-/vercel-8.2.10.tgz#c8168c538ddeef7000e314a721746a072bf5515f"
+  integrity sha512-pq1CHZF9acBATD+MagFX8XzpVUARFvuGr36pukVbYZqvrc9Wt7IY3mJdQaZoL3SccMSV5K1S6/ELGWV5wYsj8g==
   dependencies:
     "@astrojs/internal-helpers" "0.7.4"
     "@vercel/analytics" "^1.5.0"
     "@vercel/functions" "^2.2.13"
-    "@vercel/nft" "0.30.2"
+    "@vercel/nft" "0.30.1"
     "@vercel/routing-utils" "^5.1.1"
     esbuild "^0.25.0"
     tinyglobby "^0.2.15"
@@ -1013,9 +1013,9 @@
     "@types/unist" "*"
 
 "@types/node@*":
-  version "24.7.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.7.1.tgz#3f0b17eddcd965c9e337af22459b04bafbf96e5e"
-  integrity sha512-CmyhGZanP88uuC5GpWU9q+fI61j2SkhO3UGMUdfYRE6Bcy0ccyzn1Rqj9YAB/ZY4kOXmNf0ocah5GtphmLMP6Q==
+  version "24.7.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.7.2.tgz#5adf66b6e2ac5cab1d10a2ad3682e359cb652f4a"
+  integrity sha512-/NbVmcGTP+lj5oa4yiYxxeBjRivKQ5Ns1eSZeB99ExsEQ6rX5XYU1Zy/gGxY/ilqtD4Etx9mKyrPxZRetiahhA==
   dependencies:
     undici-types "~7.14.0"
 
@@ -1254,24 +1254,6 @@
   version "0.30.1"
   resolved "https://registry.yarnpkg.com/@vercel/nft/-/nft-0.30.1.tgz#75a60ecf3aee6113ec0d4082d66ad5dd39ab4eca"
   integrity sha512-2mgJZv4AYBFkD/nJ4QmiX5Ymxi+AisPLPcS/KPXVqniyQNqKXX+wjieAbDXQP3HcogfEbpHoRMs49Cd4pfkk8g==
-  dependencies:
-    "@mapbox/node-pre-gyp" "^2.0.0"
-    "@rollup/pluginutils" "^5.1.3"
-    acorn "^8.6.0"
-    acorn-import-attributes "^1.9.5"
-    async-sema "^3.1.1"
-    bindings "^1.4.0"
-    estree-walker "2.0.2"
-    glob "^10.4.5"
-    graceful-fs "^4.2.9"
-    node-gyp-build "^4.2.2"
-    picomatch "^4.0.2"
-    resolve-from "^5.0.0"
-
-"@vercel/nft@0.30.2":
-  version "0.30.2"
-  resolved "https://registry.yarnpkg.com/@vercel/nft/-/nft-0.30.2.tgz#5584cdc9778abce54827749baa92081e0bd2d723"
-  integrity sha512-pquXF3XZFg/T3TBor08rUhIGgOhdSilbn7WQLVP/aVSSO+25Rs4H/m3nxNDQ2x3znX7Z3yYjryN8xaLwypcwQg==
   dependencies:
     "@mapbox/node-pre-gyp" "^2.0.0"
     "@rollup/pluginutils" "^5.1.3"
@@ -1594,9 +1576,9 @@ arrify@^3.0.0:
   integrity sha512-tLkvA81vQG/XqE2mjDkGQHoOINtMHtysSnemrmoGe6PydDPMRbVugqyk4A6V/WDWEfm3l+0d8anA9r8cv/5Jaw==
 
 astro@^5.0.0:
-  version "5.14.4"
-  resolved "https://registry.yarnpkg.com/astro/-/astro-5.14.4.tgz#450c4d3d68323a4553612573b7ceb2e0aad0d52e"
-  integrity sha512-yqgMAO2Whi9GmZkByyiPcG7CiiPr0Me0iBSorMa6M0g+wQk/ewnIqUyr7T/uFCPTQndoKwucnYFTrf0yfb0urw==
+  version "5.14.5"
+  resolved "https://registry.yarnpkg.com/astro/-/astro-5.14.5.tgz#6d6127a8b82721beffe9bdcd646f7c5befad5392"
+  integrity sha512-EHt7y3+nHYyKzBats1AL3N4Pyrvqyr+zXBC7njUa9Tfe+gsiHlunaw+lXitTT/DDVwO2R/f/qVG7Xc6rl0b2KQ==
   dependencies:
     "@astrojs/compiler" "^2.12.2"
     "@astrojs/internal-helpers" "0.7.4"
@@ -2262,9 +2244,9 @@ emmet@^2.4.3:
     "@emmetio/css-abbreviation" "^2.1.8"
 
 emoji-regex@^10.3.0:
-  version "10.5.0"
-  resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-10.5.0.tgz#be23498b9e39db476226d8e81e467f39aca26b78"
-  integrity sha512-lb49vf1Xzfx080OKA0o6l8DQQpV+6Vg95zyCJX9VB/BqKYlhG7N4wgROUUHRA+ZPUefLnteQOad7z1kT2bV7bg==
+  version "10.6.0"
+  resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-10.6.0.tgz#bf3d6e8f7f8fd22a65d9703475bc0147357a6b0d"
+  integrity sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -5278,9 +5260,9 @@ vfile@^6.0.0, vfile@^6.0.3:
     vfile-message "^4.0.0"
 
 vite@^6.3.6:
-  version "6.3.6"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-6.3.6.tgz#69a976b64930750d40219fbc68c5200874d315c1"
-  integrity sha512-0msEVHJEScQbhkbVTb/4iHZdJ6SXp/AvxL2sjwYQFfBqleHtnCqv1J3sa9zbWz/6kW1m9Tfzn92vW+kZ1WV6QA==
+  version "6.3.7"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-6.3.7.tgz#acc4ca1ca36389c4b02e1ef8451f2d43df503bd1"
+  integrity sha512-mQYaKepA0NGMBsz8Xktt3tJUG5ELE2iT7IJ+ssXI6nxVdE2sFc/d/6w/JByqMLvWg8hNKHpPgzjgOkrhpKFnrA==
   dependencies:
     esbuild "^0.25.0"
     fdir "^6.4.4"
