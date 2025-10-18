@@ -30,7 +30,7 @@
 		"ethers": "^6.7.1",
 		"node-fetch": "^3.3.2",
 		"ramda": "0.32.0",
-		"redis": "^4.6.8",
+		"redis": "^5.0.0",
 		"uuid": "^13.0.0"
 	},
 	"devDependencies": {
