@@ -933,9 +933,9 @@
     path-browserify "^1.0.1"
 
 "@tsconfig/node10@^1.0.7":
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/@tsconfig/node10/-/node10-1.0.11.tgz#6ee46400685f130e278128c7b38b7e031ff5b2f2"
-  integrity sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@tsconfig/node10/-/node10-1.0.12.tgz#be57ceac1e4692b41be9de6be8c32a106636dba4"
+  integrity sha512-UCYBaeFvM11aU2y3YPZ//O5Rhj+xKyzy7mvcIoAjASbigy8mHMryP5cK7dgjlz2hWxh1g5pLw084E0a/wlUSFQ==
 
 "@tsconfig/node12@^1.0.7":
   version "1.0.11"
@@ -1235,10 +1235,10 @@
   resolved "https://registry.yarnpkg.com/@vercel/analytics/-/analytics-1.5.0.tgz#073f93694897414b21a8495e2619bbf64447dcaa"
   integrity sha512-MYsBzfPki4gthY5HnYN7jgInhAZ7Ac1cYDoRWFomwGHWEX7odTEzbtg9kf/QSo7XEsEAqlQugA6gJ2WS2DEa3g==
 
-"@vercel/build-utils@13.0.0":
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/@vercel/build-utils/-/build-utils-13.0.0.tgz#efca27611143f2a6ffbf709a9bfd10f58ec982bf"
-  integrity sha512-rtO2PJy4mzZCIdXz9EUbo5ehl2u7kt6CEXvcHKTPwDa9/3tTpTf43tN61OxE1hNf/8fLA/o/goX9TwwWIJGAHw==
+"@vercel/build-utils@13.0.1":
+  version "13.0.1"
+  resolved "https://registry.yarnpkg.com/@vercel/build-utils/-/build-utils-13.0.1.tgz#92b4c7d37f897e13876ae224792676eb2dae6cb6"
+  integrity sha512-RVWYBhVAwoJsuRRq/93OnKVaYEdPlceYnz5f3daRQvrhmjoYRup3y/uy+/SQ5W9I+c0kWdsbogkJ5oBkaWWMOQ==
 
 "@vercel/error-utils@2.0.3":
   version "2.0.3"
@@ -1307,15 +1307,15 @@
     resolve-from "^5.0.0"
 
 "@vercel/node@^5.0.0":
-  version "5.5.5"
-  resolved "https://registry.yarnpkg.com/@vercel/node/-/node-5.5.5.tgz#34f6fb1b3f703ce75b2a11a17c043b64e51dbc7e"
-  integrity sha512-g08FoUe2YbrwDRlws88kGgFINMXFvzJSMRUcgjpFQFLIfuiG58jVEqbRhCEt5Fa/goAyHQEzBVrEHttKbi3/sg==
+  version "5.5.6"
+  resolved "https://registry.yarnpkg.com/@vercel/node/-/node-5.5.6.tgz#c0696f7f83c2078fb72ede52f53f38fb387d437b"
+  integrity sha512-U8x9Bh70vX74fAE+3G6+M3QdWyTe1gLUzDxG3s2P2SvYRkvtpCkCO2K8UCeceyA7uGH9+XB9nU6PZy08UK+17w==
   dependencies:
     "@edge-runtime/node-utils" "2.3.0"
     "@edge-runtime/primitives" "4.1.0"
     "@edge-runtime/vm" "3.2.0"
     "@types/node" "16.18.11"
-    "@vercel/build-utils" "13.0.0"
+    "@vercel/build-utils" "13.0.1"
     "@vercel/error-utils" "2.0.3"
     "@vercel/nft" "0.30.1"
     "@vercel/static-config" "3.1.2"
@@ -1332,6 +1332,7 @@
     ts-morph "12.0.0"
     ts-node "10.9.1"
     typescript "4.9.5"
+    typescript5 "npm:typescript@5.9.3"
     undici "5.28.4"
 
 "@vercel/oidc@2.0.2":
@@ -5048,6 +5049,11 @@ typescript-auto-import-cache@^0.3.5:
   integrity sha512-RpuHXrknHdVdK7wv/8ug3Fr0WNsNi5l5aB8MYYuXhq2UH5lnEB1htJ1smhtD5VeCsGr2p8mUDtd83LCQDFVgjQ==
   dependencies:
     semver "^7.3.8"
+
+"typescript5@npm:typescript@5.9.3":
+  version "5.9.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.9.3.tgz#5b4f59e15310ab17a216f5d6cf53ee476ede670f"
+  integrity sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==
 
 typescript@4.9.5:
   version "4.9.5"
